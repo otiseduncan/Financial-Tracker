@@ -1,17 +1,18 @@
 ﻿export const dynamic = "force-dynamic"
 
-import { getToken } from "next-auth/jwt"
+import { getServerSession } from "next-auth/next"
+import { authOptions } from "@/lib/auth"
 import { plaidClient } from "@/lib/plaid"
 import { prisma } from "@/lib/prisma"
 import { NextRequest, NextResponse } from "next/server"
 
 export async function POST(req: NextRequest) {
   try {
-    const token = await getToken({ req })
-    if (!token?.sub) {
+    const session = await getServerSession(authOptions)
+    if (!session?.user?.id) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
     }
-    const userId = token.sub
+    const userId = session.user.id
 
     const { plaidItemId } = await req.json()
 
