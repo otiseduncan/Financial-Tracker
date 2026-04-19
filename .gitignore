@@ -1,0 +1,46 @@
+# dependencies
+node_modules/
+
+# next.js
+.next/
+out/
+
+# env files
+.env
+.env.local
+.env.production.local
+
+# build
+dist/
+build/
+
+# misc
+.DS_Store
+*.tsbuildinfo
+next-env.d.ts
+
+# debug
+npm-debug.log*
+
+# temp/patch files
+_patch*.ps1
+_import*.ps1
+_fix*.ts
+_check*.ts
+
+# uploads (local only)
+public/uploads/
+
+# prisma temp
+prisma/import-*.ts
+
+# IDE
+.vs/
+*.suo
+*.user
+
+# large binaries
+*.exe
+
+# receipt images (local only)
+public/images/receipts/
