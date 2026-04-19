@@ -7,7 +7,7 @@ export async function POST(req: NextRequest) {
   try {
     const token = await getToken({ req, secret: process.env.NEXTAUTH_SECRET })
     if (!token?.sub) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
+      return NextResponse.json({ error: "Unauthorized", debug: { hasSecret: !!process.env.NEXTAUTH_SECRET, url: process.env.NEXTAUTH_URL } }, { status: 401 })
     }
 
     const response = await plaidClient.linkTokenCreate({

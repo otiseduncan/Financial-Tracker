@@ -27,7 +27,7 @@ function ConnectButton({ onSuccess }: { onSuccess: () => void }) {
         if (data.link_token) {
           setLinkToken(data.link_token)
         } else {
-          setError(data.error || "Failed to initialize Plaid")
+          setError(data.error || JSON.stringify(data))
         }
       })
       .catch((e) => setError(e.message))
