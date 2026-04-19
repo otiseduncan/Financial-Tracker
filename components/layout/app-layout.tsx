@@ -3,6 +3,7 @@
 import { useState } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
+import { signOut } from "next-auth/react"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
@@ -15,6 +16,7 @@ import {
   Menu,
   Plus,
   Building2,
+  LogOut,
 } from "lucide-react"
 
 const navigation = [
@@ -62,6 +64,15 @@ export function AppLayout({ children }: AppLayoutProps) {
               )
             })}
           </nav>
+          <div className="px-4 py-4 border-t">
+            <button
+              onClick={() => signOut({ callbackUrl: "/login" })}
+              className="flex items-center w-full px-3 py-2 text-sm font-medium rounded-md text-muted-foreground hover:bg-accent hover:text-accent-foreground transition-colors"
+            >
+              <LogOut className="mr-3 h-5 w-5" />
+              Sign Out
+            </button>
+          </div>
         </div>
       </div>
 
@@ -106,6 +117,13 @@ export function AppLayout({ children }: AppLayoutProps) {
                     {item.name}
                   </Link>
                 ))}
+                <button
+                  onClick={() => signOut({ callbackUrl: "/login" })}
+                  className="flex items-center w-full px-3 py-2 text-sm font-medium rounded-md text-red-400 hover:bg-accent"
+                >
+                  <LogOut className="mr-3 h-5 w-5" />
+                  Sign Out
+                </button>
               </nav>
             </SheetContent>
           </Sheet>
