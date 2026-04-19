@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic"
+
 import { getToken } from "next-auth/jwt"
 import { plaidClient } from "@/lib/plaid"
 import { prisma } from "@/lib/prisma"
