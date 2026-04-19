@@ -23,7 +23,12 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({ link_token: response.data.link_token })
   } catch (error: any) {
-    console.error("Plaid link token error:", error?.response?.data || error)
-    return NextResponse.json({ error: "Failed to create link token" }, { status: 500 })
+    const plaidError = error?.response?.data
+    console.error("Plaid link token error:", plaidError || error)
+    return NextResponse.json({ 
+      error: plaidError?.error_message || error?.message || "Failed to create link token",
+      code: plaidError?.error_code || "UNKNOWN",
+      type: plaidError?.error_type || "UNKNOWN"
+    }, { status: 500 })
   }
 }
